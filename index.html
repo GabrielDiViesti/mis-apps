@@ -2,62 +2,77 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Control de Gastos</title>
+    <title>Mi Gestión Financiera</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; background: #f4f4f9; }
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f9; max-width: 400px; margin: auto; }
         .form-group { margin-bottom: 15px; }
-        input, select { width: 100%; padding: 10px; margin-top: 5px; box-sizing: border-box; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input, select { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
         button { width: 100%; padding: 15px; background: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; }
     </style>
 </head>
 <body>
-    <h2>Registrar Movimiento</h2>
+    <h2>Control de Gastos</h2>
     <form id="gastoForm">
-        <div class="form-group"><input type="date" id="fecha" required></div>
-        <div class="form-group"><input type="text" id="concepto" placeholder="Concepto" required></div>
         <div class="form-group">
+            <label>Fecha</label>
+            <input type="date" id="fecha" required>
+        </div>
+        <div class="form-group">
+            <label>Concepto</label>
+            <input type="text" id="concepto" placeholder="Ej: Pago de luz" required>
+        </div>
+        <div class="form-group">
+            <label>Categoría</label>
             <select id="categoria">
                 <option value="Comida">Comida</option>
                 <option value="Transporte">Transporte</option>
                 <option value="Servicios">Servicios</option>
-                <option value="Gym">Gym</option>
+                <option value="Ocio">Ocio</option>
             </select>
         </div>
         <div class="form-group">
-            <select id="tipo">
-                <option value="Gasto">Gasto</option>
-                <option value="Ingreso">Ingreso</option>
+            <label>Reserva (Fuente de dinero)</label>
+            <select id="metodo">
+                <option value="OSDE">OSDE</option>
+                <option value="LUZ">LUZ</option>
+                <option value="VISA Y AMEX SANTANDER">VISA Y AMEX SANTANDER</option>
+                <option value="PLATA MENSUAL">PLATA MENSUAL</option>
+                <option value="PSICOLOGO">PSICOLOGO</option>
+                <option value="INTERNET Y TUENTI">INTERNET Y TUENTI</option>
+                <option value="TARJETA CREDITO MERCADOPAGO">TARJETA CREDITO MERCADOPAGO</option>
+                <option value="ALQUILER Y EXPENSAS">ALQUILER Y EXPENSAS</option>
+                <option value="SALIDAS Y CORTE DE PELO">SALIDAS Y CORTE DE PELO</option>
+                <option value="NARANJA X">NARANJA X</option>
+                <option value="SUBE">SUBE</option>
+                <option value="LAVARROPAS - BNA">LAVARROPAS - BNA</option>
+                <option value="CAPSULAS DE CAFE">CAPSULAS DE CAFE</option>
             </select>
         </div>
-        <div class="form-group"><input type="number" id="monto" placeholder="Monto" required></div>
-        <div class="form-group"><input type="text" id="metodo" placeholder="Método (Visa, Efectivo, etc.)" required></div>
-        <button type="submit" id="btnEnviar">Enviar Datos</button>
+        <div class="form-group">
+            <label>Monto</label>
+            <input type="number" id="monto" placeholder="Ej: 5000" required>
+        </div>
+        <button type="submit">Registrar Gasto</button>
     </form>
 
     <script>
-        const url = "https://script.google.com/macros/s/AKfycbymezT4wSzFuUuPC8NI1fo1zmwW12LHOyxkGjohtbPkgX5c4sDDhR_J9u3gpvV_VDdpvg/exec"; // <-- PEGA TU URL AQUÍ
+        document.getElementById('fecha').valueAsDate = new Date();
+        const url = "TU_URL_AQUI"; // <-- Pega tu URL de Apps Script aquí
+
         document.getElementById('gastoForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const data = {
                 fecha: document.getElementById('fecha').value,
                 concepto: document.getElementById('concepto').value,
                 categoria: document.getElementById('categoria').value,
-                tipo: document.getElementById('tipo').value,
+                metodo: document.getElementById('metodo').value,
                 monto: document.getElementById('monto').value,
-                metodo: document.getElementById('metodo').value
+                tipo: "Gasto"
             };
-            
-            fetch(url, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            }).then(() => {
-                alert('¡Dato guardado!');
-                document.getElementById('gastoForm').reset();
-            });
+            fetch(url, { method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data) })
+            .then(() => { alert('¡Registrado!'); document.getElementById('gastoForm').reset(); document.getElementById('fecha').valueAsDate = new Date(); });
         });
     </script>
 </body>
-</html> 
+</html>
