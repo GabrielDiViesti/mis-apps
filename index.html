@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Gastos</title>
-</head>
 <body>
     <h2>Registrar Gasto</h2>
-    
     <form id="gastoForm">
         <label>Fecha:</label><br>
         <input type="date" id="fecha" required><br><br>
@@ -18,12 +12,6 @@
         <label>Categoría:</label><br>
         <input type="text" id="categoria" required><br><br>
 
-        <label>Monto:</label><br>
-        <input type="number" id="monto" required><br><br>
-
-        <label>Método de Pago:</label><br>
-        <input type="text" id="metodo" required><br><br>
-
         <label>Reserva:</label><br>
         <select id="reserva">
             <option value="Sin reserva">Sin reserva</option>
@@ -31,21 +19,22 @@
             <option value="Reserva B">Reserva B</option>
         </select><br><br>
 
+        <label>Importe:</label><br>
+        <input type="number" id="monto" required><br><br>
+
         <button type="button" onclick="enviarDatos()">Enviar Registro</button>
     </form>
 
     <script>
-        // PEGA AQUÍ TU URL DE APPS SCRIPT (la nueva que generaste)
-        const url = "https://script.google.com/macros/s/AKfycbyzjLqYoKMDP3NLXtsFIr-Mdx4lfv_HwA3GbyqldzNClX5c0g5MAxzWxrLGVmyW9zqXmQ/exec"; 
+        const url = "https://script.google.com/macros/s/AKfycbyzjLqYoKMDP3NLXtsFIr-Mdx4lfv_HwA3GbyqldzNClX5c0g5MAxzWxrLGVmyW9zqXmQ/exec"; // RECUERDA PEGAR TU URL AQUÍ
 
         function enviarDatos() {
             const data = {
                 fecha: document.getElementById('fecha').value,
                 concepto: document.getElementById('concepto').value,
                 categoria: document.getElementById('categoria').value,
-                monto: document.getElementById('monto').value,
-                metodo: document.getElementById('metodo').value,
-                reserva: document.getElementById('reserva').value
+                reserva: document.getElementById('reserva').value,
+                monto: document.getElementById('monto').value
             };
 
             fetch(url, {
@@ -56,8 +45,7 @@
             .then(() => {
                 alert("¡Gasto registrado con éxito!");
                 document.getElementById('gastoForm').reset();
-            })
-            .catch(error => console.error('Error:', error));
+            });
         }
     </script>
 </body>
