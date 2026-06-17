@@ -6,8 +6,8 @@
     <title>App Gastos</title>
     <style>
         body { font-family: sans-serif; padding: 20px; max-width: 400px; margin: auto; }
-        input, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
-        button { background-color: #007bff; color: white; border: none; }
+        input, select, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { background-color: #007bff; color: white; border: none; font-size: 16px; }
     </style>
 </head>
 <body>
@@ -15,8 +15,29 @@
     <form id="gastoForm">
         <input type="date" id="fecha" required>
         <input type="text" id="concepto" placeholder="Concepto" required>
-        <input type="text" id="categoria" placeholder="Categoría" required>
-        <input type="text" id="reserva" placeholder="Reserva" required>
+        
+        <select id="categoria">
+            <option value="Comida">Comida</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Ocio">Ocio</option>
+            <option value="Salidas">Salidas</option>
+        </select>
+
+        <select id="reserva">
+            <option value="PLATA MENSUAL">PLATA MENSUAL</option>
+            <option value="SALIDAS">SALIDAS</option>
+            <option value="OSDE">OSDE</option>
+            <option value="TUENTI Y LUZ">TUENTI Y LUZ</option>
+            <option value="VISA Y AMEX SANTANDER">VISA Y AMEX SANTANDER</option>
+            <option value="PSICOLOGO">PSICOLOGO</option>
+            <option value="INTERNET">INTERNET</option>
+            <option value="TARJETA CREDITO MERCADOPAGO">TARJETA CREDITO MERCADOPAGO</option>
+            <option value="ALQUILER Y EXPENSAS">ALQUILER Y EXPENSAS</option>
+            <option value="NARANJA X">NARANJA X</option>
+            <option value="SUBE">SUBE</option>
+            <option value="LAVARROPAS - BNA">LAVARROPAS - BNA</option>
+        </select>
+
         <input type="number" id="monto" placeholder="Importe" required>
         <button type="button" onclick="enviarDatos()">Enviar</button>
     </form>
