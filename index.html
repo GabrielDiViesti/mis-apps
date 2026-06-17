@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Gastos</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; max-width: 400px; margin: auto; }
-        input, select, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
-        button { background-color: #28a745; color: white; border: none; font-size: 16px; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 20px; max-width: 400px; margin: auto; background-color: #f4f7f6; }
+        h2 { text-align: center; color: #333; }
+        label { font-weight: bold; display: block; margin-top: 15px; }
+        input { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; margin-top: 25px; background-color: #007bff; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
+        button:active { background-color: #0056b3; }
     </style>
 </head>
 <body>
-    <h2>Registrar Gasto</h2>
+    <h2>Registro de Gastos</h2>
     <form id="gastoForm">
         <label>Fecha:</label>
         <input type="date" id="fecha" required>
@@ -23,11 +26,7 @@
         <input type="text" id="categoria" required>
 
         <label>Reserva:</label>
-        <select id="reserva">
-            <option value="Sin reserva">Sin reserva</option>
-            <option value="Reserva A">Reserva A</option>
-            <option value="Reserva B">Reserva B</option>
-        </select>
+        <input type="text" id="reserva" placeholder="Escribe aquí la reserva...">
 
         <label>Importe:</label>
         <input type="number" id="monto" required>
@@ -36,7 +35,7 @@
     </form>
 
     <script>
-        const url = "https://script.google.com/macros/s/AKfycbyzjLqYoKMDP3NLXtsFIr-Mdx4lfv_HwA3GbyqldzNClX5c0g5MAxzWxrLGVmyW9zqXmQ/exec"; // RECUERDA PEGAR TU URL AQUÍ
+        const url = "https://script.google.com/macros/s/AKfycbyzjLqYoKMDP3NLXtsFIr-Mdx4lfv_HwA3GbyqldzNClX5c0g5MAxzWxrLGVmyW9zqXmQ/exec"; 
 
         function enviarDatos() {
             const data = {
