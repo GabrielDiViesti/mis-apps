@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Control de Gastos</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f9; }
+        .form-group { margin-bottom: 15px; }
+        input, select { width: 100%; padding: 10px; margin-top: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h2>Registrar Movimiento</h2>
+    <form id="gastoForm">
+        <div class="form-group"><input type="date" id="fecha" required></div>
+        <div class="form-group"><input type="text" id="concepto" placeholder="Concepto" required></div>
+        <div class="form-group">
+            <select id="categoria">
+                <option value="Comida">Comida</option>
+                <option value="Transporte">Transporte</option>
+                <option value="Servicios">Servicios</option>
+                <option value="Gym">Gym</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select id="tipo">
+                <option value="Gasto">Gasto</option>
+                <option value="Ingreso">Ingreso</option>
+            </select>
+        </div>
+        <div class="form-group"><input type="number" id="monto" placeholder="Monto" required></div>
+        <div class="form-group"><input type="text" id="metodo" placeholder="Método (Visa, Efectivo, etc.)" required></div>
+        <button type="submit" id="btnEnviar">Enviar Datos</button>
+    </form>
+
+    <script>
+        const url = "https://script.google.com/macros/s/AKfycbymezT4wSzFuUuPC8NI1fo1zmwW12LHOyxkGjohtbPkgX5c4sDDhR_J9u3gpvV_VDdpvg/exec"; // <-- PEGA TU URL AQUÍ
+        document.getElementById('gastoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const data = {
+                fecha: document.getElementById('fecha').value,
+                concepto: document.getElementById('concepto').value,
+                categoria: document.getElementById('categoria').value,
+                tipo: document.getElementById('tipo').value,
+                monto: document.getElementById('monto').value,
+                metodo: document.getElementById('metodo').value
+            };
+            
+            fetch(url, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(() => {
+                alert('¡Dato guardado!');
+                document.getElementById('gastoForm').reset();
+            });
+        });
+    </script>
+</body>
+</html>
