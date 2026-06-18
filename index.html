@@ -6,16 +6,20 @@
     <title>App Gastos</title>
     <style>
         body { font-family: sans-serif; padding: 20px; max-width: 400px; margin: auto; }
-        input, select, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        button { background-color: #007bff; color: white; border: none; font-size: 16px; }
+        input, select, button { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { background-color: #007bff; color: white; border: none; font-size: 16px; font-weight: bold; }
     </style>
 </head>
 <body>
     <h2>Registrar Gasto</h2>
     <form id="gastoForm">
+        <label>Fecha:</label>
         <input type="date" id="fecha" required>
-        <input type="text" id="concepto" placeholder="Concepto" required>
+
+        <label>Concepto:</label>
+        <input type="text" id="concepto" placeholder="Ej: Supermercado" required>
         
+        <label>Categoría:</label>
         <select id="categoria">
             <option value="Comida">Comida</option>
             <option value="Transporte">Transporte</option>
@@ -23,6 +27,7 @@
             <option value="Salidas">Salidas</option>
         </select>
 
+        <label>Reserva:</label>
         <select id="reserva">
             <option value="PLATA MENSUAL">PLATA MENSUAL</option>
             <option value="SALIDAS">SALIDAS</option>
@@ -38,12 +43,14 @@
             <option value="LAVARROPAS - BNA">LAVARROPAS - BNA</option>
         </select>
 
-        <input type="number" id="monto" placeholder="Importe" required>
-        <button type="button" onclick="enviarDatos()">Enviar</button>
+        <label>Importe:</label>
+        <input type="number" id="monto" placeholder="Ej: 5000" required>
+
+        <button type="button" onclick="enviarDatos()">Enviar Registro</button>
     </form>
 
     <script>
-        const url = "https://script.google.com/macros/s/AKfycbyzjLqYoKMDP3NLXtsFIr-Mdx4lfv_HwA3GbyqldzNClX5c0g5MAxzWxrLGVmyW9zqXmQ/exec"; 
+        const url = "TU_URL_AQUI"; // REEMPLAZA CON TU URL
 
         function enviarDatos() {
             const data = {
@@ -62,7 +69,8 @@
             .then(() => {
                 alert("¡Gasto registrado con éxito!");
                 document.getElementById('gastoForm').reset();
-            });
+            })
+            .catch(err => alert("Error al enviar: " + err));
         }
     </script>
 </body>
